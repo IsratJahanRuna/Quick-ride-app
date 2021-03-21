@@ -27,7 +27,7 @@ const Login = () => {
 
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    //........................................//
+    
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
@@ -75,8 +75,7 @@ const Login = () => {
             setUser(newUserInfo);
         }
     }
-    //........................................//
-
+   
 
 
     const handleSubmit = (e) => {
