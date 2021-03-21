@@ -4,11 +4,9 @@ import React, { useEffect, useState } from 'react';
 import fakeData from '../Data/fakedata.json';
 import GoogleMap from '../GoogleMap/GoogleMap';
 
-// import Destination from '../Destination/Destination';
 
 const Booking = () => {
     const { id } = useParams();
-    // const{ vehicleName} = props.vehicle;
     const [vehicleInfo, setVehicleInfo] = useState([]);
 
 

@@ -11,7 +11,7 @@ if (firebase.apps.length === 0) {
     firebase.initializeApp(firebaseConfig);
 }
 
-
+//handle login
 const Login = () => {
     const [newUser, setNewUser] = useState(false);
     const [user, setUser] = useState({
@@ -27,13 +27,13 @@ const Login = () => {
 
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    
+
     let history = useHistory();
     let location = useLocation();
     let { from } = location.state || { from: { pathname: "/" } };
 
 
-
+    //google signin
     const handleGoogleSignIn = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
 
@@ -58,6 +58,7 @@ const Login = () => {
             });
     }
 
+    //handleevent
     const handleBlur = (e) => {
         let isFieldValid = true;
         if (e.target.name === 'email') {
@@ -75,7 +76,7 @@ const Login = () => {
             setUser(newUserInfo);
         }
     }
-   
+
 
 
     const handleSubmit = (e) => {
