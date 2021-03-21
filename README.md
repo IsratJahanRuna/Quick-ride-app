@@ -10,4 +10,4 @@ Quick Ride
 
 => rider can see the location in google map.
 
-=>Live-link: 
+=>Live-link: https://quick-ride-be146.web.app
