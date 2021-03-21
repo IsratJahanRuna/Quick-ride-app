@@ -1,4 +1,4 @@
-import logo from './logo.svg';
+
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HomePage from './components/HomePage/HomePage';
@@ -22,7 +22,6 @@ function App() {
   return (
 
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
-      {/* <p>  {loggedInUser.name}</p> */}
 
       <Router>
         <Header></Header>
@@ -30,21 +29,18 @@ function App() {
           <Route path="/home">
             <HomePage></HomePage>
           </Route>
-
-          <PrivateRoute path="/destination/:vehicleName">
-
-            <Destination></Destination>
-          </PrivateRoute>
-
           <Route path="/login">
             <Login></Login>
           </Route>
+          <PrivateRoute path="/destination/:vehicleName/:id">
+            <Destination></Destination>
+          </PrivateRoute>
           <PrivateRoute path="/destination">
             <Destination></Destination>
           </PrivateRoute>
-          <Route path="/booking">
+          <PrivateRoute path="/booking/:id">
             <Booking></Booking>
-          </Route>
+          </PrivateRoute>         
           <Route exact path="/">
             <HomePage />
           </Route>

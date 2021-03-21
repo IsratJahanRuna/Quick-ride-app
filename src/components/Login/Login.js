@@ -294,7 +294,8 @@ const Login = () => {
                     newUserInfo.success = true;
                     setUser(newUserInfo);
                     updateUserName(user.name);
-                    console.log(newUserInfo);
+                    setLoggedInUser(newUserInfo);
+                    history.replace(from);
                 })
                 .catch((error) => {
                     const newUserInfo = { ...user };
@@ -314,8 +315,6 @@ const Login = () => {
                     newUserInfo.success = true;
                     setUser(newUserInfo);
                     setLoggedInUser(newUserInfo);
-                    console.log(newUser);
-                    console.log('sign in user info', res.user);
                     history.replace(from);
                 })
                 .catch((error) => {
@@ -354,7 +353,7 @@ const Login = () => {
     return (
         <div className="container">
             <div className="col-md-12">
-                <div className="card shadow text-white mx-auto mt-4" style={{ width: '30rem', height: '32rem', backgroundColor: 'lightblue' }}>
+                <div className="card shadow text-white mx-auto mt-4" style={{ width: '27rem', height: '32rem', backgroundColor: 'lightblue' }}>
 
                     {/* Login form */}
                     <form className="p-3" onSubmit={handleSubmit}>
@@ -373,7 +372,7 @@ const Login = () => {
                             newUser && <input type="password" class="form-control" id="" placeholder="password"></input>
                         }
                         <button className="btn btn-primary mt-3 w-100">{newUser ? 'Create An Account' : 'Login'}</button>
-                        <p className="mt-2 text-center"> {newUser ? 'Already have an account?' : 'Do not have an account?'} <a href="#" onClick={() => setNewUser(!newUser)} name="newUser"> {newUser ? 'Login' : 'Create An Account'}</a></p>
+                        <p className="mt-2 text-center"> {newUser ? 'Already have an account?' : 'Do not have an account?'} <button href="#" style={{backgroundColor:'lightblue', border:'0', color:'blue'}} onClick={() => setNewUser(!newUser)} name="newUser"> {newUser ? 'Login' : 'Create An Account'}</button></p>
                     </form>
                 </div>
 

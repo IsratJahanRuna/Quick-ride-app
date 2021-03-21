@@ -4,15 +4,15 @@ import { useHistory } from 'react-router';
 
 
 const Vehicle = (props) => {
-    const{vehicleName,vehicleImage,vehicleDescription} = props.vehicle;
+    const{vehicleName,vehicleImage,vehicleDescription,id} = props.vehicle;
     const history = useHistory();
-    const handleDestination = (vehicleName) =>{
-        history.push(`/destination/${vehicleName}`);
+    const handleDestination = (vehicleName, id) =>{
+        history.push(`/destination/${vehicleName}/${id}`);
     }
     return (
 
 
-        <div onClick={()=>handleDestination(vehicleName)} className="container m-auto">
+        <div onClick={()=>handleDestination(vehicleName,id)} className="container m-auto">
             <Card className='mt-5'style={{ width: '15rem' }}>
   <Card.Img variant="top"style={{height: '10rem',weight: '15erm'}} src={vehicleImage} />
   <Card.Body>
