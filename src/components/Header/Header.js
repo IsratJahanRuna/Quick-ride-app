@@ -32,10 +32,10 @@ const Header = () => {
                 <Navbar.Brand href="/home" style={{ color: 'lightblue' }}><h2>Quick Ride</h2></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse className="justify-content-end nav-bar">
-                    <Nav.Link href="/home" style={{ color: 'white' }}>Home</Nav.Link>
-                    <Nav.Link href="/destination" style={{ color: 'white' }}>Destination</Nav.Link>
-                    <Nav.Link href="/booking" style={{ color: 'white' }}>Blog</Nav.Link>
-                    <Nav.Link href="/booking" style={{ color: 'white' }}>Contact</Nav.Link>
+                    <Link to="/home" className="nav-link  text-white" >Home</Link>
+                    <Link to="/destination" className="nav-link  text-white" >Destination</Link>
+                    <Link to="/blog"  className="nav-link  text-white">Blog</Link>
+                    <Link to="/contact" className="nav-link  text-white">Contact</Link>
                     {/* <Nav.Link href="/login" style={{ color: 'white', backgroundColor:'lightblue', width:'70px' }}>Login</Nav.Link> */}
                     <Link to="/login" style={{ color: 'white', backgroundColor:'lightblue', width:'77px' }} className="nav-link text-white"onClick={handleSignOut}>{loggedInUser.email?'Logout':'Login'}</Link>
                 <Link to="#" className="nav-link active text-white">{loggedInUser.displayName||loggedInUser.email}</Link>

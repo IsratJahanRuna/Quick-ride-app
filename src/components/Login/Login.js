@@ -1,170 +1,4 @@
-// import React, { useState } from 'react';
-// import firebase from "firebase/app";
-// import "firebase/auth";
-// import firebaseConfig from '../../firebase.config';
-
-
-// if (!firebase.apps.length) {
-//     firebase.initializeApp(firebaseConfig);
-// } else {
-//     firebase.app(); // if already initialized, use that one
-// }
-
-// const Login = () => {
-//     const [user, setUser] = useState({
-//         isSignedIn: false,
-//         name: '',
-//         email: '',
-//         password: ''
-
-//     })
-//     const provider = new firebase.auth.GoogleAuthProvider();
-//     const fbProvider = new firebase.auth.FacebookAuthProvider();
-//     const handleGoogleSignIn = () => {
-
-//         firebase.auth()
-//             .signInWithPopup(provider)
-//             .then((result) => {
-//                 var credential = result.credential;
-//                 var token = credential.accessToken;
-//                 var user = result.user;
-//                 console.log(user);
-//                 setUser(user);
-
-
-//             }).catch((error) => {
-//                 var errorCode = error.code;
-//                 var errorMessage = error.message;
-//                 var email = error.email;
-//                 var credential = error.credential;
-//                 console.log(errorCode, errorMessage, email);
-//             });
-//         // console.log('shdfb');
-//     }
-//     const handleFacebookSignIn = () => {
-//         firebase
-//             .auth()
-//             .signInWithPopup(fbProvider)
-//             .then((result) => {
-//                 const credential = result.credential;
-
-//                 const user = result.user;
-
-//                 const accessToken = credential.accessToken;
-//                 console.log(user);
-//                 setUser(user);
-
-
-//             })
-//             .catch((error) => {
-//                 const errorCode = error.code;
-//                 const errorMessage = error.message;
-//                 const email = error.email;
-//                 const credential = error.credential;
-//                 console.log(errorCode, errorMessage, email, credential);
-
-
-//             });
-//     }
-
-//     const handleChange = (e) => {
-
-//         let isFieldValid = true;
-//         if (e.target.name === 'email') {
-//             isFieldValid = /\S+@\S+\.\S+/.test(e.target.value);
-//         }
-//         else if (e.target.name === 'password') {
-//             const isPasswordValid = e.target.value.length > 6;
-//             const isPasswordHasNumber = /\d{1}/.test(e.target.value);
-//             isFieldValid = isPasswordValid && isPasswordHasNumber;
-//         }
-
-//         if (isFieldValid) {
-//             const newUserInfo = { ...user };
-//             newUserInfo[e.target.name] = e.target.value;
-//             setUser(newUserInfo);
-//         }
-//     }
-
-//     const handleSubmit = (e) => {
-//         console.log(user);
-//         if (user.email && user.password) {
-//             firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-//             .then(res => {
-//                 const newUserInfo = { ...user };
-//                 newUserInfo.error = '';
-//                 newUserInfo.success = true;
-//                 setUser(newUserInfo);
-//                 updateUserName(user.name);
-//                 })
-//                 .catch((error) => {
-//                     const newUserInfo = { ...user };
-//                     newUserInfo.error = error.message;
-//                     newUserInfo.success = false;
-//                     setUser(newUserInfo);
-
-//                 });
-//         }
-
-//         const updateUserName = name => {
-//             const user = firebase.auth().currentUser;
-
-//             user.updateProfile({
-//                 displayName: name
-
-//             })
-//                 .then(function () {
-//                     console.log('user name Updated SuccessFully');
-//                 })
-//                 .catch(function (error) {
-//                     console.log(error);
-//                 });
-//         }
-//     }
-
-//     return (
-//         <div>
-//             <div className="container">
-//                 <div className="col-md-12">
-//                     <div className="card bg-dark text-white mx-auto mt-5" style={{ width: '30rem', height: '33rem' }}>
-//                         <form className="p-3" onBlur={handleSubmit}>
-//                             <h2 className="text-center">Create An Account</h2>
-//                             <label  className="p-2">Name:</label>
-//                             <input type="text" name="name" onBlur={handleChange} className="form-control"  placeholder="Your Name" required></input>
-//                             <label  className="p-2">Username or Email</label>
-//                             <input type="text" name="email" onBlur={handleChange} className="form-control"  placeholder="Your Email" required></input>
-//                             <label  className="p-2">Password</label>
-//                             <input type="password" name="password" onBlur={handleChange} className="form-control"  placeholder="password" required></input>
-//                             {/* <label for="" class="p-2">Confirm Password</label>
-//                             <input type="password" onChange={handleChange} class="form-control" id="" placeholder="password" required></input> */}
-//                             <input type="submit" value="Create an account" className=" form-control mt-4 w-100 bg-primary text-white rounded border-primary" style={{ height: '40px' }} ></input>
-//                             {/* <button className="btn btn-primary mt-4 w-100" type="submit">Create an account</button> */}
-//                             <p className="mt-3">Already have an account?<a href="#">Login</a></p>
-//                         </form>
-
-
-//                     </div>
-//                 </div>
-//             </div>
-//             <br />
-
-
-
-//             <button className="btn btn-light mt-3 w-25 shadow border" onClick={handleGoogleSignIn}><img style={{ width: '50px', height: '50px' }} src="https://play-lh.googleusercontent.com/6UgEjh8Xuts4nwdWzTnWH8QtLuHqRMUB7dp24JYVE2xcYzq4HA8hFfcAbU-R-PC_9uA1" alt="" /> Continue with Google</button>
-//             <br />
-//             <br />
-//             <button className="btn btn-light mb-5 mt-2 w-25 shadow border" onClick={handleFacebookSignIn}> <img style={{ width: '70px', height: '40px', marginTop: '5px' }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5zB4b4hobVU9YVNhH7mh507OaQLfVNSdEDU9hz9iOe3S3USTWJhW4ct9SWPKQT1qGCJQ&usqp=CAU" alt="" />Continue with Facebook</button>
-
-//         </div>
-//     );
-// };
-
-// export default Login;
-
-
 import React, { useState } from 'react';
-// import './Login.css';
-// import google from '../../images/google.png';
 import firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from '../../firebase.config';
@@ -190,7 +24,7 @@ const Login = () => {
         success: false
     });
 
-    //........................................//
+
 
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
     //........................................//
@@ -199,11 +33,6 @@ const Login = () => {
     let { from } = location.state || { from: { pathname: "/" } };
 
 
-    //........................................//
-
-
-    //........................................//
-    //google sign in
 
     const handleGoogleSignIn = () => {
         const provider = new firebase.auth.GoogleAuthProvider();
@@ -228,40 +57,7 @@ const Login = () => {
                 // ...
             });
     }
-    //........................................//
 
-
-
-    //........................................//
-
-
-    // const handleFacebookSignIn = () => {
-    //     const fbProvider = new firebase.auth.FacebookAuthProvider();
-    //             firebase
-    //                 .auth()
-    //                 .signInWithPopup(fbProvider)
-    //                 .then((result) => {
-    //                     const credential = result.credential;
-
-    //                     const user = result.user;
-
-    //                     const accessToken = credential.accessToken;
-    //                     console.log(user);
-    //                     setUser(user);
-
-
-    //                 })
-    //                 .catch((error) => {
-    //                     const errorCode = error.code;
-    //                     const errorMessage = error.message;
-    //                     const email = error.email;
-    //                     const credential = error.credential;
-    //                     console.log(errorCode, errorMessage, email, credential);
-
-
-    //                 });
-    //         }
-    //handleBlur
     const handleBlur = (e) => {
         let isFieldValid = true;
         if (e.target.name === 'email') {
@@ -282,8 +78,7 @@ const Login = () => {
     //........................................//
 
 
-    //........................................//
-    //handleSubmit
+
     const handleSubmit = (e) => {
         // create new user
         if (newUser && user.email && user.password) {
@@ -327,12 +122,12 @@ const Login = () => {
         }
         e.preventDefault();
     }
-    //........................................//
 
 
 
 
-    //........................................//
+
+
     //update User Name
     const updateUserName = name => {
         const user = firebase.auth().currentUser;
@@ -348,7 +143,7 @@ const Login = () => {
                 console.log(error);
             });
     }
-    //........................................//
+    //
 
     return (
         <div className="container">
@@ -372,7 +167,7 @@ const Login = () => {
                             newUser && <input type="password" class="form-control" id="" placeholder="password"></input>
                         }
                         <button className="btn btn-primary mt-3 w-100">{newUser ? 'Create An Account' : 'Login'}</button>
-                        <p className="mt-2 text-center"> {newUser ? 'Already have an account?' : 'Do not have an account?'} <button href="#" style={{backgroundColor:'lightblue', border:'0', color:'blue'}} onClick={() => setNewUser(!newUser)} name="newUser"> {newUser ? 'Login' : 'Create An Account'}</button></p>
+                        <p className="mt-2 text-center"> {newUser ? 'Already have an account?' : 'Do not have an account?'} <button href="#" style={{ backgroundColor: 'lightblue', border: '0', color: 'blue' }} onClick={() => setNewUser(!newUser)} name="newUser"> {newUser ? 'Login' : 'Create An Account'}</button></p>
                     </form>
                 </div>
 
@@ -390,9 +185,6 @@ const Login = () => {
                 </div>
 
 
-                {/* <br />
-                <br />
-                <button className="btn btn-light mb-5 mt-2 w-25 shadow border" onClick={handleFacebookSignIn}> <img style={{ width: '70px', height: '40px', marginTop: '5px' }} src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5zB4b4hobVU9YVNhH7mh507OaQLfVNSdEDU9hz9iOe3S3USTWJhW4ct9SWPKQT1qGCJQ&usqp=CAU" alt="" />Continue with Facebook</button> */}
             </div>
         </div>
     );
